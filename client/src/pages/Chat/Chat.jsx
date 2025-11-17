@@ -105,13 +105,13 @@ export const ChatPage = () => {
 			<h1>Chat room: {roomName}</h1>
 			<div className={styles.chatPage__messagesContainer}>
 				<div className={styles.chatPage__messages}>
-					{messages.map((msg, idx) => {
+					{messages.map(msg => {
 						const isAuthor = msg.id === socket.id;
 						const messageContainerClass = isAuthor
 							? `${styles.chatPage__messageContainer} ${styles['chatPage__messageContainer--author']}`
 							: styles.chatPage__messageContainer;
 						return (
-							<div key={idx} className={messageContainerClass}>
+							<div key={msg.time} className={messageContainerClass}>
 								<p className={styles.chatPage__author}>
 									{isAuthor ? 'You' : msg.author}
 								</p>
