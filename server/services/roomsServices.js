@@ -71,13 +71,15 @@ export const leaveRoom = (roomName, socketId) => {
 };
 
 export const renameRoom = (oldRoomName, newRoomName, socketId) => {
-	const room = getRoomByName(oldRoomName);
+  const room = getRoomByName(oldRoomName);
+
+  if (!room) {
+		throw new Error('Room not found');
+	}
+
   const isOwner = room.ownerId === socketId;
   const roomExists = rooms.some(r => r.name === newRoomName);
 
-	if (!room) {
-		throw new Error('Room not found');
-	}
 
 	if (!isOwner) {
 		throw new Error('Only the room owner can rename the room');
